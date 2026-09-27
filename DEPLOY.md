@@ -95,16 +95,72 @@ falla por eso, cambia esa línea a una versión concreta y vuelve a hacer push:
 
 ---
 
-## Paso 3 — El dominio
+## Paso 3 — Conectar el dominio (comprado en Hostinger)
 
-Cuando lo tengas contratado:
+El dominio **conductosinstalaciones.es** ya está registrado en Hostinger, y
+`SITE_URL` en `src/config/site.ts` ya apunta exactamente ahí. **No hay que tocar
+ni una línea de código.**
 
-1. Cambia `SITE_URL` en `src/config/site.ts` al dominio real, sin barra final.
-2. `git add -A && git commit -m "Dominio definitivo" && git push`
-3. En Vercel: *Settings* → *Domains* → añade `conductosinstalaciones.es` y
-   `www.conductosinstalaciones.es`. Vercel te dice qué registros DNS poner en el
-   registrador. El certificado HTTPS se emite solo.
-4. Deja uno de los dos como principal y el otro redirigiendo, no los dos activos.
+### 3.1 — Añadir el dominio en Vercel
+
+En Vercel: tu proyecto → *Settings* → *Domains* → **Add Domain** →
+`conductosinstalaciones.es`. Vercel te ofrecerá añadir también
+`www.conductosinstalaciones.es`: acéptalo.
+
+Vercel te mostrará entonces **los valores DNS exactos de tu proyecto**.
+
+> ⚠️ **Copia los valores de TU pantalla, no de ningún tutorial.** Vercel ya no
+> usa un CNAME común para todos: cada proyecto tiene el suyo, con una pinta
+> parecida a `d1d4fc829fe7bc7c.vercel-dns-017.com`. Si copias el de otro sitio,
+> el dominio no valida nunca.
+
+### 3.2 — Poner esos valores en Hostinger
+
+**Mantén los servidores de nombres de Hostinger** (`atlas.dns-parking.com` y
+`hyperion.dns-parking.com`). No los cambies por los de Vercel: si lo haces,
+tendrás que rehacer en Vercel todos los registros de correo cuando quieras el
+email `@conductosinstalaciones.es`, y es un lío innecesario. Con cambiar dos
+registros basta.
+
+En hPanel: *Noms de domaine* → **conductosinstalaciones.es** → *DNS / Serveurs
+de noms* → **Gérer les enregistrements DNS**.
+
+1. **Borra primero los registros de aparcamiento.** Hostinger crea por defecto
+   un registro `A` en `@` y un `CNAME` en `www` que apuntan a su página de
+   aparcamiento. Si los dejas, chocan con los nuevos y el dominio no valida.
+   Borra los dos.
+
+2. Crea estos dos, con los valores que te enseñó Vercel:
+
+   | Tipo | Nombre | Valor | TTL |
+   | --- | --- | --- | --- |
+   | `A` | `@` | el que indique Vercel (normalmente `76.76.21.21`) | 3600 |
+   | `CNAME` | `www` | el valor propio de tu proyecto, `…vercel-dns-0XX.com` | 3600 |
+
+3. Guarda. La propagación suele tardar entre 10 minutos y 2 horas. Vercel emite
+   el certificado HTTPS solo en cuanto detecta los registros: no hay que tocar
+   nada de SSL. El aviso de "Installation du SSL en cours" que ves ahora en
+   Hostinger es de su página de aparcamiento y deja de tener sentido.
+
+### 3.3 — Cuál de los dos manda
+
+En *Settings* → *Domains*, deja **`conductosinstalaciones.es` como principal** y
+`www.conductosinstalaciones.es` **redirigiendo** hacia él (308). Tiene que ser en
+ese sentido, porque todas las etiquetas canónicas de la web están escritas sin
+`www`. Con los dos activos a la vez tendrías dos direcciones para cada página y
+Google repartiría la fuerza entre ambas.
+
+### 3.4 — Comprobar que quedó bien
+
+Cuando propague, estas cuatro direcciones tienen que acabar todas en
+`https://conductosinstalaciones.es/` :
+
+```
+http://conductosinstalaciones.es
+https://www.conductosinstalaciones.es
+http://www.conductosinstalaciones.es
+https://conductosinstalaciones.es/climatizacion   (debe añadir la barra final)
+```
 
 ---
 
