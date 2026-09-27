@@ -1,0 +1,11 @@
+---
+import Plate from './Plate.astro';
+import type { PhotoId } from '../lib/photos';
+import type { Lang } from '../i18n/routes';
+
+interface Props { ids: readonly PhotoId[]; lang: Lang; startFig?: number }
+const { ids, lang, startFig = 1 } = Astro.props;
+---
+<div class="plate-grid">
+  {ids.map((id, i) => <Plate id={id} lang={lang} fig={startFig + i} />)}
+</div>

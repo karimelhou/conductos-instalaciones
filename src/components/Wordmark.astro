@@ -1,0 +1,31 @@
+---
+/** The logo, rebuilt as HTML text: the banner wordmark is a heavy black
+ *  oblique condensed face, which Barlow Condensed 700 italic matches. Text
+ *  rather than a raster means it is sharp on retina and recolourable. */
+import { BUSINESS } from '../config/site';
+interface Props { compact?: boolean }
+const { compact = false } = Astro.props;
+---
+<span class:list={['wordmark', compact && 'wordmark--compact']}>
+  <span class="wordmark__a">{BUSINESS.wordmark.first}</span><span class="wordmark__b">{BUSINESS.wordmark.second}</span>
+</span>
+
+<style>
+  .wordmark {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.28em;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-style: italic;
+    font-size: 1.5rem;
+    line-height: 1;
+    letter-spacing: 0.005em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .wordmark--compact { font-size: 1.25rem; }
+  .wordmark__a { color: var(--white); }
+  .wordmark__b { color: var(--red-500); }
+  @media (min-width: 640px) { .wordmark { font-size: 1.75rem; } }
+</style>

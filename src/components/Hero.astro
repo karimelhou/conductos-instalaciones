@@ -1,0 +1,78 @@
+---
+/**
+ * The LCP element is an H1 in a preloaded 17 KB font over a solid colour —
+ * not a photograph. On five of the seven pages there is no photo here at all;
+ * a line-art diagram carries the right-hand side instead.
+ */
+import { BUSINESS } from '../config/site';
+import { type Lang, pathFor } from '../i18n/routes';
+import { UI } from '../i18n/ui';
+import { telHref } from '../lib/contact';
+import type { PhotoId } from '../lib/photos';
+import Plate from './Plate.astro';
+
+interface Props {
+  lang: Lang;
+  eyebrow: string;
+  title: string;
+  lede: string;
+  photoId?: PhotoId;
+  diagram?: boolean;
+}
+const { lang, eyebrow, title, lede, photoId } = Astro.props;
+const t = UI[lang];
+const telLabel = t.callAria + ' ' + BUSINESS.phone.display;
+const hasSide = Boolean(photoId) || Astro.slots.has('diagram');
+---
+<section class="band band--ink hero">
+  <div class="container">
+    <div class:list={['hero__grid', hasSide && 'hero__grid--split']}>
+      <div class="hero__text">
+        <p class="eyebrow">{eyebrow}</p>
+        <h1 class="hero__h1">{title}</h1>
+        <p class="lede hero__lede">{lede}</p>
+        <div class="hero__cta">
+          <a class="btn btn--primary" href={pathFor('contacto', lang)}>{t.quoteCta}</a>
+          <a class="btn btn--ghost tnum" href={telHref()} aria-label={telLabel}>
+            {BUSINESS.phone.display}
+          </a>
+        </div>
+      </div>
+
+      {hasSide && (
+        <div class="hero__side">
+          {photoId
+            ? <Plate id={photoId} lang={lang} fig={1} eager sizes="(min-width: 900px) 420px, 92vw" />
+            : <slot name="diagram" />}
+        </div>
+      )}
+    </div>
+  </div>
+  <div class="trim"></div>
+</section>
+
+<style>
+  .hero { position: relative; padding-block: var(--s8) var(--s9); }
+  .hero__grid { display: grid; gap: var(--s7); }
+  @media (min-width: 900px) {
+    .hero__grid--split {
+      grid-template-columns: 1fr minmax(300px, 420px);
+      gap: var(--s9);
+      align-items: center;
+    }
+  }
+  .hero__h1 {
+    font-size: var(--fs-hero);
+    line-height: 0.94;
+    letter-spacing: -0.01em;
+    color: var(--white);
+  }
+  .hero__lede { margin-top: var(--s5); max-width: 52ch; }
+  .hero__cta {
+    margin-top: var(--s6);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s3);
+  }
+  .hero__side :global(svg) { width: 100%; height: auto; opacity: 0.45; }
+</style>

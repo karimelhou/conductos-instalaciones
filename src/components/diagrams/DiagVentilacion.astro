@@ -1,0 +1,101 @@
+---
+/** Supply / extract schematic with a heat recovery unit. */
+import type { Lang } from '../../i18n/routes';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+
+const L = {
+  es: {
+    title: 'Esquema de una instalación de ventilación con recuperador de calor',
+    unit: 'Recuperador',
+    supply: 'Impulsión',
+    extract: 'Retorno',
+    outdoor: 'Aire exterior',
+    exhaust: 'Expulsión',
+    diffuser: 'Difusor',
+    grille: 'Rejilla de retorno',
+    room: 'Local',
+  },
+  en: {
+    title: 'Ventilation schematic with a heat recovery unit',
+    unit: 'Heat recovery',
+    supply: 'Supply',
+    extract: 'Return',
+    outdoor: 'Outdoor air',
+    exhaust: 'Exhaust',
+    diffuser: 'Diffuser',
+    grille: 'Return grille',
+    room: 'Room',
+  },
+}[lang];
+---
+<svg class="diag" viewBox="0 0 660 400" role="img" aria-label={L.title}>
+  <title>{L.title}</title>
+
+  <rect x="40" y="150" width="500" height="200" class="s-hair" />
+  <text x="56" y="338" class="t-lbl">{L.room}</text>
+
+  <rect x="430" y="36" width="150" height="84" class="f-unit" />
+  <path d="M430 36 L580 120 M580 36 L430 120" class="s-hair" />
+  <text x="505" y="24" class="t-key" text-anchor="middle">{L.unit}</text>
+
+  <rect x="90" y="56" width="340" height="24" class="f-steel" />
+  <rect x="90" y="92" width="340" height="24" class="f-steel" />
+
+  <rect x="118" y="80" width="26" height="62" class="f-steel" />
+  <path d="M104 142 L158 142 L146 158 L116 158 Z" class="f-accent" />
+  <text x="131" y="184" class="t-lbl" text-anchor="middle">{L.diffuser}</text>
+
+  <rect x="296" y="116" width="26" height="42" class="f-steel" />
+  <rect x="284" y="158" width="50" height="12" class="f-steel" />
+  <g class="s-hair">
+    <line x1="292" y1="160" x2="292" y2="168" />
+    <line x1="302" y1="160" x2="302" y2="168" />
+    <line x1="312" y1="160" x2="312" y2="168" />
+    <line x1="322" y1="160" x2="322" y2="168" />
+  </g>
+  <text x="309" y="192" class="t-lbl" text-anchor="middle">{L.grille}</text>
+
+  <g class="a-warm">
+    <path d="M400 68 L152 68" marker-end="url(#aw)" />
+    <path d="M131 96 L131 130" marker-end="url(#aw)" />
+  </g>
+  <g class="a-cool">
+    <path d="M309 148 L309 114" marker-end="url(#aw)" />
+    <path d="M334 104 L400 104" marker-end="url(#aw)" />
+    <path d="M636 104 L592 104" marker-end="url(#aw)" />
+  </g>
+  <g class="a-warm">
+    <path d="M590 68 L636 68" marker-end="url(#aw)" />
+  </g>
+
+  <text x="446" y="50" class="t-lbl">{L.supply}</text>
+  <text x="446" y="112" class="t-lbl">{L.extract}</text>
+  <text x="644" y="122" class="t-lbl" text-anchor="end">{L.outdoor}</text>
+  <text x="644" y="56" class="t-lbl" text-anchor="end">{L.exhaust}</text>
+
+  <defs>
+    <marker id="aw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5"
+            markerHeight="5" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="currentColor" />
+    </marker>
+  </defs>
+</svg>
+
+<style>
+  .diag { width: 100%; height: auto; color: currentColor; }
+  .s-hair { stroke: currentColor; stroke-width: 1; fill: none; opacity: 0.45; }
+  .f-steel { fill: currentColor; fill-opacity: 0.1; stroke: currentColor; stroke-width: 1.5; }
+  .f-unit { fill: currentColor; fill-opacity: 0.18; stroke: currentColor; stroke-width: 1.5; }
+  .f-accent { fill: var(--red-500); fill-opacity: 0.85; stroke: var(--red-500); stroke-width: 1.5; }
+  .a-warm { stroke: var(--red-500); stroke-width: 2; fill: none; color: var(--red-500); }
+  .a-cool { stroke: currentColor; stroke-width: 2; fill: none; opacity: 0.55; }
+  .t-key {
+    font-family: var(--font-display); font-size: 17px; font-weight: 700;
+    text-transform: uppercase; fill: currentColor;
+  }
+  .t-lbl {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em;
+    text-transform: uppercase; fill: currentColor; opacity: 0.72;
+  }
+</style>

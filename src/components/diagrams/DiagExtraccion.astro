@@ -1,0 +1,148 @@
+---
+/**
+ * Section through a commercial kitchen extraction system.
+ * This drawing carries the section of the page that would otherwise need a
+ * photograph of a finished installation, which does not exist in the asset set.
+ */
+import type { Lang } from '../../i18n/routes';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+
+const L = {
+  es: {
+    title: 'Esquema de una instalación de extracción de humos de cocina',
+    hood: 'Campana',
+    plenum: 'Plenum',
+    filters: 'Filtros de lamas',
+    duct: 'Conducto de extracción',
+    fan: 'Ventilador',
+    roof: 'Descarga en cubierta',
+    cowl: 'Sombrerete',
+    line: 'Línea de cocción',
+    makeup: 'Aire de compensación',
+  },
+  en: {
+    title: 'Section through a commercial kitchen extraction system',
+    hood: 'Hood',
+    plenum: 'Plenum',
+    filters: 'Baffle filters',
+    duct: 'Extraction duct',
+    fan: 'Fan',
+    roof: 'Roof discharge',
+    cowl: 'Cowl',
+    line: 'Cooking line',
+    makeup: 'Make-up air',
+  },
+}[lang];
+---
+<svg class="diag" viewBox="0 0 660 430" role="img" aria-label={L.title}>
+  <title>{L.title}</title>
+
+  <!-- building envelope -->
+  <path d="M40 400 L40 90 L470 90" class="s-hair" />
+  <path d="M40 90 L470 90" class="s-hair" />
+  <line x1="40" y1="400" x2="620" y2="400" class="s-solid" />
+  <!-- roof slab -->
+  <rect x="36" y="84" width="440" height="10" class="f-slab" />
+
+  <!-- cooking line -->
+  <rect x="96" y="336" width="210" height="26" class="f-steel" />
+  <rect x="120" y="326" width="28" height="10" class="f-steel" />
+  <rect x="176" y="326" width="28" height="10" class="f-steel" />
+  <rect x="232" y="326" width="28" height="10" class="f-steel" />
+  <text x="201" y="382" class="t-lbl" text-anchor="middle">{L.line}</text>
+
+  <!-- hood body -->
+  <path d="M78 210 L324 210 L296 258 L106 258 Z" class="f-steel" />
+  <rect x="78" y="196" width="246" height="14" class="f-steel" />
+  <!-- baffle filters -->
+  <g class="s-solid">
+    <line x1="128" y1="252" x2="142" y2="218" />
+    <line x1="152" y1="252" x2="166" y2="218" />
+    <line x1="176" y1="252" x2="190" y2="218" />
+    <line x1="200" y1="252" x2="214" y2="218" />
+    <line x1="224" y1="252" x2="238" y2="218" />
+    <line x1="248" y1="252" x2="262" y2="218" />
+  </g>
+
+  <!-- plenum + riser -->
+  <rect x="170" y="150" width="70" height="46" class="f-steel" />
+  <rect x="188" y="94" width="34" height="56" class="f-steel" />
+
+  <!-- horizontal duct to fan -->
+  <rect x="188" y="52" width="250" height="34" class="f-steel" />
+  <path d="M188 94 L188 52 M222 94 L222 52" class="s-solid" />
+
+  <!-- fan -->
+  <rect x="438" y="40" width="70" height="58" class="f-fan" />
+  <circle cx="473" cy="69" r="19" class="s-solid" fill="none" />
+  <path d="M473 50 L473 88 M454 69 L492 69" class="s-hair" />
+
+  <!-- discharge + cowl -->
+  <rect x="524" y="40" width="34" height="58" class="f-steel" />
+  <path d="M508 69 L524 69" class="s-solid" />
+  <path d="M514 34 L568 34 L556 16 L526 16 Z" class="f-accent" />
+
+  <!-- airflow arrows -->
+  <g class="a-flow">
+    <path d="M201 320 L201 268" marker-end="url(#ar)" />
+    <path d="M205 186 L205 158" marker-end="url(#ar)" />
+    <path d="M205 140 L205 104" marker-end="url(#ar)" />
+    <path d="M250 69 L424 69" marker-end="url(#ar)" />
+    <path d="M541 30 L541 6" marker-end="url(#ar)" />
+  </g>
+
+  <!-- make-up air -->
+  <g class="a-cool">
+    <path d="M600 200 L470 200 L470 300" marker-end="url(#ac)" />
+  </g>
+  <text x="604" y="192" class="t-lbl" text-anchor="end">{L.makeup}</text>
+
+  <!-- callouts -->
+  <text x="64" y="190" class="t-key">{L.hood}</text>
+  <text x="252" y="176" class="t-key">{L.plenum}</text>
+  <text x="290" y="278" class="t-lbl">{L.filters}</text>
+  <text x="246" y="34" class="t-key">{L.duct}</text>
+  <text x="473" y="116" class="t-key" text-anchor="middle">{L.fan}</text>
+  <text x="652" y="116" class="t-lbl" text-anchor="end">{L.cowl}</text>
+  <text x="652" y="132" class="t-lbl" text-anchor="end">{L.roof}</text>
+
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5"
+            markerHeight="5" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="currentColor" />
+    </marker>
+    <marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5"
+            markerHeight="5" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="currentColor" />
+    </marker>
+  </defs>
+</svg>
+
+<style>
+  .diag { width: 100%; height: auto; color: currentColor; }
+  .s-solid { stroke: currentColor; stroke-width: 1.5; fill: none; }
+  .s-hair { stroke: currentColor; stroke-width: 1; fill: none; opacity: 0.45; }
+  .f-steel { fill: currentColor; fill-opacity: 0.1; stroke: currentColor; stroke-width: 1.5; }
+  .f-slab { fill: currentColor; fill-opacity: 0.22; }
+  .f-fan { fill: currentColor; fill-opacity: 0.16; stroke: currentColor; stroke-width: 1.5; }
+  .f-accent { fill: var(--red-500); fill-opacity: 0.85; stroke: var(--red-500); stroke-width: 1.5; }
+  .a-flow { stroke: var(--red-500); stroke-width: 2; fill: none; color: var(--red-500); }
+  .a-cool { stroke: currentColor; stroke-width: 1.5; fill: none; opacity: 0.5; stroke-dasharray: 5 4; }
+  .t-key {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 700;
+    text-transform: uppercase;
+    fill: currentColor;
+  }
+  .t-lbl {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    fill: currentColor;
+    opacity: 0.72;
+  }
+</style>

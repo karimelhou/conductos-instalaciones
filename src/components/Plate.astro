@@ -1,0 +1,50 @@
+---
+/**
+ * THE ONLY component in the project that renders a photograph.
+ *
+ * That is deliberate: it is what enforces the hard rule that no photo is ever
+ * displayed wider than --photo-max (560px). Every source here is 738-1300px
+ * wide, so at 344-560px they render at 1.6-2.7x device pixel ratio and look
+ * sharp. Shown any bigger they look exactly as low-resolution as they are.
+ */
+import { Picture } from 'astro:assets';
+import { photo, widthsFor, type PhotoId } from '../lib/photos';
+import type { Lang } from '../i18n/routes';
+import { UI } from '../i18n/ui';
+
+interface Props {
+  id: PhotoId;
+  lang: Lang;
+  fig?: number;
+  sizes?: string;
+  eager?: boolean;
+  caption?: boolean;
+}
+
+const {
+  id,
+  lang,
+  fig,
+  sizes = '(min-width: 900px) 344px, (min-width: 600px) 45vw, 92vw',
+  eager = false,
+  caption = true,
+} = Astro.props;
+
+const p = photo(id);
+const shapeClass =
+  p.ratio === '3:4' ? 'plate--tall' : p.ratio === '16:9' ? 'plate--wide' : '';
+const figLabel = fig !== undefined ? `${UI[lang].figAbbrev} ${String(fig).padStart(2, '0')} — ` : '';
+---
+<figure class:list={['plate', shapeClass]}>
+  <Picture
+    src={p.image}
+    alt={p.alt[lang]}
+    widths={widthsFor(p)}
+    sizes={sizes}
+    formats={['avif', 'webp']}
+    loading={eager ? 'eager' : 'lazy'}
+    decoding={eager ? 'sync' : 'async'}
+    fetchpriority={eager ? 'high' : 'auto'}
+  />
+  {caption && <figcaption>{figLabel}{p.caption[lang]}</figcaption>}
+</figure>

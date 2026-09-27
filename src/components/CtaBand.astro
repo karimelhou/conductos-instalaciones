@@ -1,0 +1,57 @@
+---
+import { BUSINESS } from '../config/site';
+import type { Lang } from '../i18n/routes';
+import { UI } from '../i18n/ui';
+import { telHref, telHref2, waHref, mailHref } from '../lib/contact';
+
+interface Props { lang: Lang; heading?: string; body?: string; message?: string }
+const { lang, heading, body, message } = Astro.props;
+const t = UI[lang];
+const telLabel = t.callAria + ' ' + BUSINESS.phone.display;
+const tel2Label = t.callAria + ' ' + BUSINESS.phone2.display;
+const waLabel = t.whatsappAria + ' ' + BUSINESS.phone.display;
+---
+<section class="band band--ink">
+  <div class="container cta">
+    <div class="cta__text">
+      <h2>{heading ?? t.ctaBandHeading}</h2>
+      <p class="lede">{body ?? t.ctaBandBody}</p>
+    </div>
+    <div class="cta__actions">
+      <a class="btn btn--primary tnum" href={telHref()} aria-label={telLabel}>
+        {t.callCta} {BUSINESS.phone.display}
+      </a>
+      <a class="btn btn--wa" href={waHref(message)} target="_blank" rel="noopener" aria-label={waLabel}>
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97s-.47-.15-.67.15-.77.96-.94 1.16-.35.22-.64.07a8.2 8.2 0 0 1-2.4-1.48 9 9 0 0 1-1.66-2.06c-.18-.3 0-.46.13-.6s.3-.35.44-.52a2 2 0 0 0 .3-.5.55.55 0 0 0 0-.52c-.08-.15-.67-1.6-.91-2.2s-.49-.5-.67-.51h-.57a1.1 1.1 0 0 0-.8.37 3.34 3.34 0 0 0-1.04 2.48 5.8 5.8 0 0 0 1.21 3.08 13.26 13.26 0 0 0 5.08 4.49c.71.3 1.26.49 1.69.63a4.06 4.06 0 0 0 1.87.12 3.06 3.06 0 0 0 2-1.41 2.48 2.48 0 0 0 .17-1.41c-.07-.13-.26-.2-.56-.35M12.05 21.8h-.02a9.8 9.8 0 0 1-4.99-1.37l-.36-.21-3.71.97 1-3.62-.24-.37A9.79 9.79 0 0 1 18.98 5.04a9.73 9.73 0 0 1 2.87 6.9 9.8 9.8 0 0 1-9.8 9.85M20.5 3.49A12.2 12.2 0 0 0 1.4 18.2L0 24l5.94-1.56a12.16 12.16 0 0 0 5.83 1.49h.01A12.19 12.19 0 0 0 20.5 3.49"/>
+        </svg>
+        {t.whatsappCta}
+      </a>
+      <p class="cta__alt">
+        <a class="tnum" href={telHref2()} aria-label={tel2Label}>{BUSINESS.phone2.display}</a>
+        <span aria-hidden="true">·</span>
+        <a href={mailHref()}>{BUSINESS.email}</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta { display: grid; gap: var(--s6); }
+  @media (min-width: 900px) {
+    .cta { grid-template-columns: 1fr auto; align-items: center; gap: var(--s9); }
+  }
+  .cta__text .lede { margin-top: var(--s4); max-width: 46ch; }
+  .cta__actions { display: flex; flex-direction: column; gap: var(--s3); align-items: flex-start; }
+  @media (min-width: 900px) { .cta__actions { align-items: stretch; min-width: 280px; } }
+  .cta__alt {
+    font-size: var(--fs-small);
+    color: var(--steel-300);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s2);
+    margin-top: var(--s2);
+  }
+  .cta__alt a { color: var(--steel-300); }
+  .cta__alt a:hover { color: var(--white); }
+</style>

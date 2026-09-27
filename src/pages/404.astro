@@ -1,0 +1,37 @@
+---
+import { BUSINESS } from '../config/site';
+import { pathFor } from '../i18n/routes';
+import { UI } from '../i18n/ui';
+import { telHref } from '../lib/contact';
+import Base from '../layouts/Base.astro';
+
+const es = UI.es;
+const en = UI.en;
+---
+<Base
+  pageKey="legal"
+  lang="es"
+  title="Página no encontrada | Conductos Instalaciones"
+  description="La página que buscas no existe o ha cambiado de dirección. Vuelve al inicio para ver nuestros servicios de conductos y climatización, o llámanos."
+>
+  <section class="band band--ink nf">
+    <div class="container">
+      <p class="eyebrow">Error 404</p>
+      <h1>{es.notFoundTitle}</h1>
+      <p class="lede">{es.notFoundBody}</p>
+      <p class="lede" lang="en">{en.notFoundBody}</p>
+      <div class="nf__cta">
+        <a class="btn btn--primary" href={pathFor('home', 'es')}>{es.notFoundCta}</a>
+        <a class="btn btn--ghost" href={pathFor('home', 'en')} lang="en">{en.notFoundCta}</a>
+        <a class="btn btn--ghost tnum" href={telHref()}>{BUSINESS.phone.display}</a>
+      </div>
+    </div>
+    <div class="trim"></div>
+  </section>
+</Base>
+
+<style>
+  .nf { padding-block: var(--s9) var(--s10); }
+  .nf .lede { margin-top: var(--s4); max-width: 54ch; }
+  .nf__cta { margin-top: var(--s7); display: flex; flex-wrap: wrap; gap: var(--s3); }
+</style>

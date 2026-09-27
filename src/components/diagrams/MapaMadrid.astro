@@ -1,0 +1,58 @@
+---
+/** Simplified service-area map. Deliberately NOT a Google Maps iframe: that
+ *  would set third-party cookies and make a consent banner mandatory. */
+import type { Lang } from '../../i18n/routes';
+interface Props { lang?: Lang }
+const { lang = 'es' } = Astro.props;
+const title =
+  lang === 'es'
+    ? 'Zona de actuación: Madrid y Comunidad de Madrid'
+    : 'Service area: Madrid and the Comunidad de Madrid';
+---
+<svg class="mapa" viewBox="0 0 300 320" role="img" aria-label={title}>
+  <title>{title}</title>
+  <path
+    class="region"
+    d="M150 12 L198 30 L236 66 L262 118 L268 170 L250 226 L214 272 L166 302 L120 300
+       L80 274 L48 232 L30 178 L34 122 L60 70 L104 30 Z"
+  />
+  <circle class="ring" cx="150" cy="160" r="52" />
+  <circle class="ring" cx="150" cy="160" r="94" />
+  <g class="town">
+    <circle cx="150" cy="104" r="3" /><circle cx="196" cy="140" r="3" />
+    <circle cx="192" cy="196" r="3" /><circle cx="150" cy="222" r="3" />
+    <circle cx="106" cy="196" r="3" /><circle cx="104" cy="138" r="3" />
+    <circle cx="228" cy="104" r="3" /><circle cx="236" cy="216" r="3" />
+    <circle cx="150" cy="60" r="3" /><circle cx="72" cy="240" r="3" />
+    <circle cx="64" cy="106" r="3" /><circle cx="150" cy="268" r="3" />
+  </g>
+  <circle class="hub" cx="150" cy="160" r="8" />
+  <text class="cap" x="150" y="146" text-anchor="middle">MADRID</text>
+</svg>
+
+<style>
+  .mapa { width: 100%; height: auto; }
+  .region {
+    fill: currentColor;
+    fill-opacity: 0.07;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-opacity: 0.5;
+  }
+  .hub { fill: var(--red-500); }
+  .ring {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1;
+    stroke-opacity: 0.3;
+    stroke-dasharray: 4 5;
+  }
+  .town circle { fill: currentColor; fill-opacity: 0.55; }
+  .cap {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    fill: currentColor;
+    opacity: 0.85;
+  }
+</style>

@@ -1,0 +1,15 @@
+---
+interface Props {
+  tone?: 'paper' | 'alt' | 'white' | 'ink';
+  id?: string;
+  narrow?: boolean;
+}
+const { tone = 'paper', id, narrow = false } = Astro.props;
+---
+<section class:list={['band', `band--${tone}`]} id={id}>
+  <div class="container">
+    <div class:list={[narrow && 'prose']}>
+      <slot />
+    </div>
+  </div>
+</section>

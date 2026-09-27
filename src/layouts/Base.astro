@@ -1,0 +1,42 @@
+---
+import '../styles/global.css';
+import '../styles/print.css';
+
+import { type Lang, type PageKey } from '../i18n/routes';
+import { UI } from '../i18n/ui';
+import SeoHead from '../components/SeoHead.astro';
+import JsonLd from '../components/JsonLd.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import WhatsAppBubble from '../components/WhatsAppBubble.astro';
+import StickyCallBar from '../components/StickyCallBar.astro';
+
+interface Props {
+  pageKey: PageKey;
+  lang: Lang;
+  title: string;
+  description: string;
+  jsonLd?: unknown;
+  waMessage?: string;
+}
+
+const { pageKey, lang, title, description, jsonLd, waMessage } = Astro.props;
+const t = UI[lang];
+---
+<!doctype html>
+<html lang={lang === 'es' ? 'es-ES' : 'en-GB'}>
+  <head>
+    <SeoHead pageKey={pageKey} lang={lang} title={title} description={description} />
+    {jsonLd && <JsonLd data={jsonLd} />}
+  </head>
+  <body>
+    <a class="skip" href="#contenido">{t.skipToContent}</a>
+    <SiteHeader pageKey={pageKey} lang={lang} />
+    <main id="contenido">
+      <slot />
+    </main>
+    <SiteFooter lang={lang} />
+    <WhatsAppBubble lang={lang} message={waMessage} />
+    <StickyCallBar lang={lang} message={waMessage} />
+  </body>
+</html>

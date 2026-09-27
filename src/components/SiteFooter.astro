@@ -1,0 +1,126 @@
+---
+import { BUSINESS, SERVICE_AREAS, addressOneLine, hasAddress } from '../config/site';
+import { type Lang, NAV_PAGES, pathFor } from '../i18n/routes';
+import { UI } from '../i18n/ui';
+import { telHref, telHref2, mailHref } from '../lib/contact';
+import { COPY } from '../copy/registry';
+import Wordmark from './Wordmark.astro';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = UI[lang];
+const year = 2026;
+const municipios = SERVICE_AREAS;
+const weekdayHours = BUSINESS.hours.weekdays.open + '–' + BUSINESS.hours.weekdays.close;
+const saturdayHours = BUSINESS.hours.saturday.open + '–' + BUSINESS.hours.saturday.close;
+---
+<div class="trim trim--top"></div>
+<footer class="ftr">
+  <div class="container ftr__grid">
+    <div class="ftr__brand">
+      <Wordmark compact />
+      <p>{t.footerTagline}</p>
+    </div>
+
+    <nav class="ftr__col" aria-label={t.footerServices}>
+      <h2>{t.footerServices}</h2>
+      <ul>
+        {NAV_PAGES.map((p) => (
+          <li><a href={pathFor(p.key, lang)}>{COPY[p.key][lang].navLabel}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="ftr__col">
+      <h2>{t.footerContact}</h2>
+      <ul class="ftr__nap">
+        <li>
+          <span>{t.phoneLabel}</span>
+          <a class="tnum" href={telHref()}>{BUSINESS.phone.display}</a>
+        </li>
+        <li>
+          <span>{t.phone2Label}</span>
+          <a class="tnum" href={telHref2()}>{BUSINESS.phone2.display}</a>
+        </li>
+        <li>
+          <span>{t.emailLabel}</span>
+          <a href={mailHref()}>{BUSINESS.email}</a>
+        </li>
+        {hasAddress() && (
+          <li>
+            <span>{t.addressLabel}</span>
+            <address>{addressOneLine()}</address>
+          </li>
+        )}
+        <li>
+          <span>{t.hoursLabel}</span>
+          <span class="tnum">{t.hoursWeekdays} {weekdayHours}</span>
+          <span class="tnum">{t.hoursSaturday} {saturdayHours}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container ftr__areas">
+    <p>{municipios.join(' · ')}</p>
+  </div>
+
+  <div class="container ftr__legal">
+    <p>© {year} {BUSINESS.name}. {t.footerRights}</p>
+    <p><a href={pathFor('legal', lang)}>{t.footerLegalLink}</a></p>
+  </div>
+</footer>
+
+<style>
+  .ftr {
+    background: var(--ink-900);
+    background-image: var(--hatch);
+    color: var(--steel-300);
+    padding-top: var(--s8);
+    font-size: var(--fs-small);
+  }
+  .ftr__grid { display: grid; gap: var(--s7); }
+  @media (min-width: 760px) { .ftr__grid { grid-template-columns: 1.4fr 1fr 1.2fr; } }
+
+  .ftr__brand p { margin-top: var(--s4); max-width: 34ch; }
+  .ftr h2 {
+    font-size: var(--fs-eyebrow);
+    font-family: var(--font-mono);
+    letter-spacing: 0.1em;
+    color: var(--white);
+    margin-bottom: var(--s4);
+  }
+  .ftr ul { list-style: none; padding: 0; display: grid; gap: var(--s3); }
+  .ftr a { color: var(--steel-300); text-decoration: none; }
+  .ftr a:hover { color: var(--white); text-decoration: underline; }
+
+  .ftr__nap li { display: grid; gap: 2px; }
+  .ftr__nap li > span:first-child {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--steel-500);
+  }
+  .ftr__nap a, .ftr__nap address { color: var(--white); font-style: normal; }
+
+  .ftr__areas {
+    margin-top: var(--s8);
+    padding-top: var(--s5);
+    border-top: 1px solid var(--hair-dark);
+    font-size: 0.8125rem;
+    color: var(--steel-500);
+  }
+  .ftr__legal {
+    margin-top: var(--s5);
+    padding-top: var(--s5);
+    padding-bottom: var(--s7);
+    border-top: 1px solid var(--hair-dark);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s4);
+    justify-content: space-between;
+    font-size: 0.8125rem;
+    color: var(--steel-500);
+  }
+</style>

@@ -1,0 +1,33 @@
+{
+  "name": "conductos-instalaciones",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20.3.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "check": "astro check",
+    "build": "astro check && astro build && node tools/verify-dist.mjs",
+    "build:fast": "astro build",
+    "preview": "astro preview",
+    "verify": "node tools/verify-dist.mjs",
+    "images": "python tools/prepare-images.py",
+    "images:audit": "python tools/audit-images.py",
+    "og": "python tools/make-og.py",
+    "icons": "python tools/make-favicons.py"
+  },
+  "dependencies": {
+    "astro": "5.18.2",
+    "@astrojs/sitemap": "3.6.0",
+    "sharp": "^0.34.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "typescript": "^5.7.0"
+  },
+  "overrides": {
+    "undici": "^7.16.0"
+  }
+}

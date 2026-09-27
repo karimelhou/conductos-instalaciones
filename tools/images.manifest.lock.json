@@ -1,0 +1,544 @@
+{
+ "images": [
+  {
+   "id": "cubierta-panel-preaislado",
+   "src": "toooo.jpeg",
+   "source_size": [
+    918,
+    1505
+   ],
+   "after_crop": [
+    918,
+    1505
+   ],
+   "aspect_box": [
+    0,
+    20,
+    918,
+    1244
+   ],
+   "output_size": [
+    918,
+    1224
+   ],
+   "ratio": "3:4",
+   "wb_strength": 0.6,
+   "wb_gains": [
+    1.0734,
+    1.0057,
+    0.9364
+   ],
+   "autocontrast_cutoff": [
+    0.4,
+    0.6
+   ],
+   "mean_luma_before_tone": 159.6,
+   "grade": "neutral",
+   "bytes": 218550
+  },
+  {
+   "id": "garaje-conductos-rejillas",
+   "src": "tooooo.jpeg",
+   "source_size": [
+    918,
+    492
+   ],
+   "after_crop": [
+    918,
+    479
+   ],
+   "aspect_box": [
+    0,
+    0,
+    852,
+    479
+   ],
+   "output_size": [
+    852,
+    479
+   ],
+   "ratio": "16:9",
+   "wb_strength": 0.6,
+   "wb_gains": [
+    1.0421,
+    1.0169,
+    0.949
+   ],
+   "autocontrast_cutoff": [
+    0.4,
+    0.6
+   ],
+   "mean_luma_before_tone": 112.3,
+   "grade": "neutral",
+   "bytes": 104027
+  },
+  {
+   "id": "cubierta-red-conductos-uta",
+   "src": "to.jpeg",
+   "source_size": [
+    918,
+    688
+   ],
+   "after_crop": [
+    918,
+    688
+   ],
+   "aspect_box": [
+    0,
+    0,
+    918,
+    688
+   ],
+   "output_size": [
+    918,
+    688
+   ],
+   "ratio": "4:3",
+   "wb_strength": 0.6,
+   "wb_gains": [
+    1.0489,
+    0.9951,
+    0.9622
+   ],
+   "autocontrast_cutoff": [
+    0.4,
+    0.6
+   ],
+   "mean_luma_before_tone": 143.0,
+   "grade": "neutral",
+   "bytes": 91128
+  },
+  {
+   "id": "sotano-conductos-suspendidos",
+   "src": "toooooooooo.jpeg",
+   "source_size": [
+    918,
+    504
+   ],
+   "after_crop": [
+    918,
+    504
+   ],
+   "aspect_box": [
+    11,
+    0,
+    907,
+    504
+   ],
+   "output_size": [
+    896,
+    504
+   ],
+   "ratio": "16:9",
+   "wb_strength": 0.6,
+   "wb_gains": [
+    1.0333,
+    0.9938,
+    0.9758
+   ],
+   "autocontrast_cutoff": [
+    0.4,
+    0.6
+   ],
+   "mean_luma_before_tone": 126.9,
+   "grade": "neutral",
+   "bytes": 89882
+  },
+  {
+   "id": "red-conductos-derivaciones",
+   "src": "too.jpeg",
+   "source_size": [
+    918,
+    901
+   ],
+   "after_crop": [
+    918,
+    901
+   ],
+   "aspect_box": [
+    0,
+    61,
+    918,
+    749
+   ],
+   "output_size": [
+    918,
+    688
+   ],
+   "ratio": "4:3",
+   "wb_strength": 0.45,
+   "wb_gains": [
+    1.0016,
+    0.9992,
+    0.9992
+   ],
+   "autocontrast_cutoff": [
+    0.4,
+    0.6
+   ],
+   "mean_luma_before_tone": 116.8,
+   "grade": "neutral",
+   "bytes": 130868
+  },
+  {
+   "id": "obra-derivacion-y",
+   "src": "WhatsApp Image 2026-08-30 at 1.48.33 PMsas.jpeg",
+   "source_size": [
+    900,
+    1600
+   ],
+   "after_crop": [
+    900,
+    1380
+   ],
+   "aspect_box": [
+    0,
+    0,
+    900,
+    1200
+   ],
+   "output_size": [
+    900,
+    1200
+   ],
+   "ratio": "3:4",
+   "wb_strength": 0.45,
+   "wb_gains": [
+    1.0211,
+    0.9867,
+    0.9937
+   ],
+   "autocontrast_cutoff": [
+    0.4,
+    0.6
+   ],
+   "mean_luma_before_tone": 107.3,
+   "grade": "neutral",
+   "bytes": 172792
+  },
+  {
+   "id": "cubierta-extractores-sombreretes",
+   "src": "WhatsApp Image 2026-08-30 at 1.48.26 PMhhh.jpeg",
+   "source_size": [
+    738,
+    1600
+   ],
+   "after_crop": [
+    738,
+    554
+   ],
+   "aspect_box": [
+    0,
+    0,
+    738,
+    554
+   ],
+   "output_size": [
+    738,
+    554
+   ],
+   "ratio": "4:3",
+   "wb_strength": 0.5,
+   "wb_gains": [
+    1.0068,
+    0.9942,
+    0.9992
+   ],
+   "autocontrast_cutoff": [
+    0.4,
+    0.6
+   ],
+   "mean_luma_before_tone": 100.5,
+   "grade": "neutral",
+   "bytes": 84733
+  },
+  {
+   "id": "montante-inox-patio",
+   "src": "WhatsApp Image 2026-08-30 at gggPM.jpeg",
+   "source_size": [
+    1200,
+    1600
+   ],
+   "after_crop": [
+    1200,
+    1600
+   ],
+   "aspect_box": [
+    0,
+    0,
+    1200,
+    1600
+   ],
+   "output_size": [
+    1200,
+    1600
+   ],
+   "ratio": "3:4",
+   "wb_strength": 0.5,
+   "wb_gains": [
+    0.9834,
+    0.9964,
+    1.0217
+   ],
+   "autocontrast_cutoff": [
+    0.4,
+    0.6
+   ],
+   "mean_luma_before_tone": 121.2,
+   "grade": "neutral",
+   "bytes": 338491
+  },
+  {
+   "id": "taller-helicoidal-espiro",
+   "src": "WhatsApp Image 2026-08-30 at 1.48.33 PMsasa.jpeg",
+   "source_size": [
+    900,
+    1600
+   ],
+   "after_crop": [
+    900,
+    1600
+   ],
+   "aspect_box": [
+    0,
+    200,
+    900,
+    1400
+   ],
+   "output_size": [
+    900,
+    1200
+   ],
+   "ratio": "3:4",
+   "wb_strength": 0.45,
+   "wb_gains": [
+    1.006,
+    0.9927,
+    1.0015
+   ],
+   "autocontrast_cutoff": [
+    0.4,
+    0.6
+   ],
+   "mean_luma_before_tone": 112.5,
+   "grade": "neutral",
+   "bytes": 195789
+  },
+  {
+   "id": "taller-piezas-acopio",
+   "src": "WhatsApp Image 2026-08-30 at 1.39.09 PM.jpeg",
+   "source_size": [
+    900,
+    1600
+   ],
+   "after_crop": [
+    900,
+    1350
+   ],
+   "aspect_box": [
+    0,
+    75,
+    900,
+    1275
+   ],
+   "output_size": [
+    900,
+    1200
+   ],
+   "ratio": "3:4",
+   "wb_strength": 0.45,
+   "wb_gains": [
+    0.995,
+    0.9972,
+    1.008
+   ],
+   "autocontrast_cutoff": [
+    0.4,
+    0.6
+   ],
+   "mean_luma_before_tone": 132.6,
+   "grade": "neutral",
+   "bytes": 264172
+  },
+  {
+   "id": "taller-campana-plegadora",
+   "src": "WhatsApp Image 2026-08-30 at 1.39.55 PM.jpeg",
+   "source_size": [
+    900,
+    1600
+   ],
+   "after_crop": [
+    900,
+    1350
+   ],
+   "aspect_box": [
+    0,
+    8,
+    900,
+    1208
+   ],
+   "output_size": [
+    900,
+    1200
+   ],
+   "ratio": "3:4",
+   "wb_strength": 0.7,
+   "wb_gains": [
+    0.9811,
+    1.0368,
+    0.9848
+   ],
+   "autocontrast_cutoff": [
+    0.4,
+    0.6
+   ],
+   "mean_luma_before_tone": 109.5,
+   "grade": "neutral",
+   "bytes": 208651
+  },
+  {
+   "id": "taller-nesting-cadcam",
+   "src": "WhatsApp Image 2026-08-30 at 1.48.26 PM.jpeg",
+   "source_size": [
+    1600,
+    1200
+   ],
+   "after_crop": [
+    1315,
+    975
+   ],
+   "aspect_box": [
+    8,
+    0,
+    1308,
+    975
+   ],
+   "output_size": [
+    1300,
+    975
+   ],
+   "ratio": "4:3",
+   "wb_strength": 0.45,
+   "wb_gains": [
+    1.042,
+    0.9924,
+    0.9712
+   ],
+   "autocontrast_cutoff": [
+    0.4,
+    0.6
+   ],
+   "mean_luma_before_tone": 115.0,
+   "grade": "neutral",
+   "bytes": 242130
+  },
+  {
+   "id": "obra-equipos-sodeca",
+   "src": "WhatsApp Image 2026-08-30 at 1.48.33 PM.jpeg",
+   "source_size": [
+    1200,
+    1600
+   ],
+   "after_crop": [
+    1200,
+    900
+   ],
+   "aspect_box": [
+    0,
+    0,
+    1200,
+    900
+   ],
+   "output_size": [
+    1200,
+    900
+   ],
+   "ratio": "4:3",
+   "wb_strength": 0.45,
+   "wb_gains": [
+    0.9768,
+    0.9888,
+    1.0391
+   ],
+   "autocontrast_cutoff": [
+    0.4,
+    0.6
+   ],
+   "mean_luma_before_tone": 166.4,
+   "grade": "neutral",
+   "bytes": 363434
+  },
+  {
+   "id": "cocina-campana-inox",
+   "src": "toooooooooooooo.jpeg",
+   "source_size": [
+    918,
+    647
+   ],
+   "after_crop": [
+    918,
+    644
+   ],
+   "aspect_box": [
+    0,
+    0,
+    859,
+    644
+   ],
+   "output_size": [
+    859,
+    644
+   ],
+   "ratio": "4:3",
+   "wb_strength": 0.45,
+   "wb_gains": [
+    1.0044,
+    1.0006,
+    0.9951
+   ],
+   "autocontrast_cutoff": [
+    0.4,
+    0.6
+   ],
+   "mean_luma_before_tone": 171.3,
+   "grade": "neutral",
+   "bytes": 86590
+  },
+  {
+   "id": "producto-panel-preaislado",
+   "src": "toooooooooooooooooooo.jpeg",
+   "source_size": [
+    918,
+    997
+   ],
+   "after_crop": [
+    918,
+    997
+   ],
+   "aspect_box": [
+    85,
+    0,
+    833,
+    997
+   ],
+   "output_size": [
+    748,
+    997
+   ],
+   "ratio": "3:4",
+   "wb_strength": 0.25,
+   "wb_gains": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "autocontrast_cutoff": [
+    0.4,
+    0.6
+   ],
+   "mean_luma_before_tone": 208.2,
+   "grade": "neutral",
+   "bytes": 82855
+  }
+ ]
+}

@@ -1,0 +1,109 @@
+---
+/** No hamburger, no JavaScript: below 980px the nav becomes a horizontal
+ *  scroll row, which is one fewer moving part and is always visible. */
+import { BUSINESS } from '../config/site';
+import { type Lang, type PageKey, NAV_PAGES, pathFor } from '../i18n/routes';
+import { UI } from '../i18n/ui';
+import { telHref } from '../lib/contact';
+import { COPY } from '../copy/registry';
+import Wordmark from './Wordmark.astro';
+import LangSwitch from './LangSwitch.astro';
+
+interface Props { pageKey: PageKey; lang: Lang }
+const { pageKey, lang } = Astro.props;
+const t = UI[lang];
+const telLabel = t.callAria + ' ' + BUSINESS.phone.display;
+---
+<header class="hdr">
+  <div class="container hdr__bar">
+    <a class="hdr__logo" href={pathFor('home', lang)} aria-label={BUSINESS.name}>
+      <Wordmark />
+    </a>
+
+    <nav class="hdr__nav" aria-label={t.navLabel}>
+      <ul>
+        {NAV_PAGES.map((p) => (
+          <li>
+            <a
+              href={pathFor(p.key, lang)}
+              aria-current={p.key === pageKey ? 'page' : undefined}
+            >{COPY[p.key][lang].navLabel}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="hdr__actions">
+      <LangSwitch pageKey={pageKey} lang={lang} />
+      <a class="hdr__tel tnum" href={telHref()} aria-label={telLabel}>
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.3.2 2.5.57 3.6a1 1 0 0 1-.25 1z"/>
+        </svg>
+        <span>{BUSINESS.phone.display}</span>
+      </a>
+    </div>
+  </div>
+  <div class="trim"></div>
+</header>
+
+<style>
+  .hdr { background: var(--ink-900); background-image: var(--hatch); }
+  .hdr__bar {
+    display: flex;
+    align-items: center;
+    gap: var(--s4);
+    flex-wrap: wrap;
+    padding-block: var(--s3);
+  }
+  .hdr__logo { text-decoration: none; flex: none; }
+
+  .hdr__nav { order: 3; width: 100%; overflow-x: auto; scrollbar-width: none; }
+  .hdr__nav::-webkit-scrollbar { display: none; }
+  .hdr__nav ul {
+    display: flex;
+    gap: var(--s5);
+    list-style: none;
+    padding: 0 0 var(--s2);
+    margin: 0;
+    width: max-content;
+  }
+  .hdr__nav li { flex: none; }
+  .hdr__nav a {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.0625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--steel-300);
+    text-decoration: none;
+    padding-bottom: 4px;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+  }
+  .hdr__nav a:hover { color: var(--white); }
+  .hdr__nav a[aria-current='page'] { color: var(--white); border-bottom-color: var(--red-500); }
+
+  .hdr__actions { margin-left: auto; display: flex; align-items: center; gap: var(--s3); }
+  .hdr__tel {
+    display: none;
+    align-items: center;
+    gap: var(--s2);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--white);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+  }
+  .hdr__tel svg { width: 18px; height: 18px; color: var(--red-500); }
+  .hdr__tel:hover { color: var(--white); }
+  .hdr__tel:hover svg { color: var(--red-300); }
+
+  @media (min-width: 640px) { .hdr__tel { display: inline-flex; } }
+  @media (min-width: 1120px) {
+    .hdr__nav { order: 0; width: auto; overflow: visible; margin-left: var(--s6); }
+    .hdr__nav ul { padding-bottom: 0; }
+    .hdr__bar { padding-block: var(--s4); flex-wrap: nowrap; }
+  }
+</style>

@@ -1,0 +1,160 @@
+---
+/**
+ * The shared skeleton behind all three service pages and the workshop page,
+ * in both languages. Every section is driven by the copy module, so the page
+ * files themselves are ten lines and the structure cannot drift between
+ * Spanish and English.
+ */
+import { type Lang, type PageKey, urlFor } from '../i18n/routes';
+import { UI } from '../i18n/ui';
+import type { ServicePageCopy } from '../copy/types';
+import {
+  breadcrumbNode,
+  businessNode,
+  faqNode,
+  graph,
+  serviceNode,
+  websiteNode,
+  type Crumb,
+} from '../lib/schema';
+
+import Base from './Base.astro';
+import Hero from '../components/Hero.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Band from '../components/Band.astro';
+import Plate from '../components/Plate.astro';
+import PlateGrid from '../components/PlateGrid.astro';
+import SpecTable from '../components/SpecTable.astro';
+import StepList from '../components/StepList.astro';
+import Faq from '../components/Faq.astro';
+import CtaBand from '../components/CtaBand.astro';
+import ServiceCards from '../components/ServiceCards.astro';
+import AreaServed from '../components/AreaServed.astro';
+import DiagExtraccion from '../components/diagrams/DiagExtraccion.astro';
+import DiagVentilacion from '../components/diagrams/DiagVentilacion.astro';
+import DiagSeccion from '../components/diagrams/DiagSeccion.astro';
+import DiagPlegado from '../components/diagrams/DiagPlegado.astro';
+
+interface Props {
+  pageKey: PageKey;
+  lang: Lang;
+  copy: ServicePageCopy;
+  /** The workshop page is not one of the three cross-linked services. */
+  isService?: boolean;
+}
+
+const { pageKey, lang, copy, isService = true } = Astro.props;
+const t = UI[lang];
+
+const crumbs: Crumb[] = [
+  { name: t.breadcrumbHome, url: urlFor('home', lang) },
+  { name: copy.navLabel, url: urlFor(pageKey, lang) },
+];
+
+const nodes: unknown[] = [
+  businessNode(lang),
+  websiteNode(lang),
+  breadcrumbNode(crumbs),
+  faqNode(copy.faq),
+];
+if (isService) nodes.push(serviceNode(pageKey, lang, copy.schema));
+
+// Alternate the band tone so consecutive sections never share a ground.
+const tones = ['paper', 'white', 'alt'] as const;
+let figNo = 0;
+---
+<Base
+  pageKey={pageKey}
+  lang={lang}
+  title={copy.title}
+  description={copy.description}
+  jsonLd={graph(nodes)}
+  waMessage={copy.waMessage}
+>
+  <Hero lang={lang} eyebrow={copy.eyebrow} title={copy.h1} lede={copy.lede} />
+  <Breadcrumbs crumbs={crumbs} lang={lang} />
+
+  {copy.blocks.map((block, i) => {
+    const photos = block.photos ?? [];
+    const start = figNo + 1;
+    figNo += photos.length;
+    return (
+      <Band tone={tones[i % tones.length]}>
+        <div class="blk">
+          <div class="prose">
+            <h2>{block.h2}</h2>
+            {block.p?.map((para) => <p>{para}</p>)}
+            {block.bullets && (
+              <ul>{block.bullets.map((b) => <li>{b}</li>)}</ul>
+            )}
+            {block.subs?.map((s) => (
+              <>
+                <h3>{s.h3}</h3>
+                <p>{s.p}</p>
+              </>
+            ))}
+          </div>
+
+          {block.diagram === 'extraccion' && <div class="fig"><DiagExtraccion lang={lang} /></div>}
+          {block.diagram === 'ventilacion' && <div class="fig"><DiagVentilacion lang={lang} /></div>}
+          {block.diagram === 'seccion' && <div class="fig"><DiagSeccion lang={lang} /></div>}
+          {block.diagram === 'plegado' && <div class="fig"><DiagPlegado lang={lang} /></div>}
+
+          {photos.length === 1 && (
+            <div class="one"><Plate id={photos[0]} lang={lang} fig={start} /></div>
+          )}
+          {photos.length > 1 && (
+            <div class="many"><PlateGrid ids={photos} lang={lang} startFig={start} /></div>
+          )}
+        </div>
+      </Band>
+    );
+  })}
+
+  <Band tone="white">
+    <h2>{t.specHeading}</h2>
+    <div class="after">
+      <SpecTable caption={copy.spec.caption} head={copy.spec.head} rows={copy.spec.rows} />
+    </div>
+  </Band>
+
+  <Band tone="paper">
+    <h2>{copy.stepsHeading}</h2>
+    <div class="after"><StepList steps={copy.steps} /></div>
+  </Band>
+
+  <Band tone="alt">
+    <AreaServed lang={lang} />
+  </Band>
+
+  <Band tone="white">
+    <h2>{t.faqHeading}</h2>
+    <div class="after"><Faq items={copy.faq} /></div>
+  </Band>
+
+  <Band tone="paper">
+    <h2>{t.otherServices}</h2>
+    <div class="after">
+      <ServiceCards lang={lang} exclude={isService ? pageKey : undefined} />
+    </div>
+  </Band>
+
+  <CtaBand
+    lang={lang}
+    heading={copy.ctaHeading}
+    body={copy.ctaBody}
+    message={copy.waMessage}
+  />
+</Base>
+
+<style>
+  .blk { display: grid; gap: var(--s6); }
+  .fig { max-width: 660px; }
+  .one { max-width: var(--photo-max); }
+  .after { margin-top: var(--s6); }
+  @media (min-width: 1000px) {
+    .blk:has(.one) { grid-template-columns: 1fr var(--photo-max); align-items: start; gap: var(--s8); }
+    .blk:has(.one) .prose { grid-column: 1; }
+    .blk:has(.one) .one { grid-column: 2; }
+  }
+</style>

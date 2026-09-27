@@ -1,0 +1,75 @@
+---
+/** The three duct families the company fabricates and installs, in section. */
+import type { Lang } from '../../i18n/routes';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+
+const L = {
+  es: {
+    title: 'Secciones de conducto rectangular, helicoidal y de panel preaislado',
+    rect: 'Rectangular',
+    rectNote: 'Chapa galvanizada 0,5–1,0 mm',
+    spiro: 'Helicoidal',
+    spiroNote: 'Espiro, unión por manguito',
+    panel: 'Panel preaislado',
+    panelNote: 'Aluminio + núcleo aislante',
+    joint: 'Junta transversal con brida',
+  },
+  en: {
+    title: 'Sections through rectangular, spiral and pre-insulated panel duct',
+    rect: 'Rectangular',
+    rectNote: 'Galvanised sheet 0.5–1.0 mm',
+    spiro: 'Spiral',
+    spiroNote: 'Spiro, coupler joint',
+    panel: 'Pre-insulated panel',
+    panelNote: 'Aluminium + insulating core',
+    joint: 'Transverse flanged joint',
+  },
+}[lang];
+---
+<svg class="diag" viewBox="0 0 660 250" role="img" aria-label={L.title}>
+  <title>{L.title}</title>
+
+  <g>
+    <rect x="46" y="54" width="140" height="92" class="f-steel" />
+    <rect x="40" y="48" width="10" height="104" class="f-accent" />
+    <rect x="182" y="48" width="10" height="104" class="f-accent" />
+    <path d="M58 66 L58 134 M174 66 L174 134" class="s-hair" />
+    <text x="116" y="180" class="t-key" text-anchor="middle">{L.rect}</text>
+    <text x="116" y="200" class="t-lbl" text-anchor="middle">{L.rectNote}</text>
+    <text x="116" y="220" class="t-lbl" text-anchor="middle">{L.joint}</text>
+  </g>
+
+  <g>
+    <ellipse cx="330" cy="100" rx="56" ry="46" class="f-steel" />
+    <ellipse cx="330" cy="100" rx="46" ry="37" class="s-hair" />
+    <path d="M288 70 Q330 86 372 70 M288 90 Q330 106 372 90 M288 110 Q330 126 372 110"
+          class="s-hair" />
+    <text x="330" y="180" class="t-key" text-anchor="middle">{L.spiro}</text>
+    <text x="330" y="200" class="t-lbl" text-anchor="middle">{L.spiroNote}</text>
+  </g>
+
+  <g>
+    <rect x="474" y="54" width="140" height="92" class="f-steel" />
+    <rect x="482" y="62" width="124" height="76" class="s-hair" />
+    <path d="M496 78 L496 122 M520 78 L520 122 M544 78 L544 122 M568 78 L568 122 M592 78 L592 122"
+          class="s-hair" />
+    <text x="544" y="180" class="t-key" text-anchor="middle">{L.panel}</text>
+    <text x="544" y="200" class="t-lbl" text-anchor="middle">{L.panelNote}</text>
+  </g>
+</svg>
+
+<style>
+  .diag { width: 100%; height: auto; color: currentColor; }
+  .s-hair { stroke: currentColor; stroke-width: 1; fill: none; opacity: 0.45; }
+  .f-steel { fill: currentColor; fill-opacity: 0.1; stroke: currentColor; stroke-width: 1.5; }
+  .f-accent { fill: var(--red-500); fill-opacity: 0.85; stroke: var(--red-500); stroke-width: 1.5; }
+  .t-key {
+    font-family: var(--font-display); font-size: 17px; font-weight: 700;
+    text-transform: uppercase; fill: currentColor;
+  }
+  .t-lbl {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em;
+    text-transform: uppercase; fill: currentColor; opacity: 0.72;
+  }
+</style>

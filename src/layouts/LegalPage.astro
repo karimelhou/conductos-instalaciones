@@ -1,0 +1,107 @@
+---
+import { BUSINESS, addressOneLine, hasAddress, hasLegalIdentity } from '../config/site';
+import type { Lang } from '../i18n/routes';
+import type { LegalCopy } from '../copy/types';
+import TextPage from './TextPage.astro';
+
+interface Props { lang: Lang; copy: LegalCopy }
+const { lang, copy } = Astro.props;
+
+const L = {
+  es: { holder: 'Titular', taxId: 'NIF / CIF', registry: 'Registro Mercantil',
+        address: 'Domicilio', email: 'Correo electrónico', phone: 'Teléfono',
+        rite: 'Empresa instaladora habilitada (RITE)', activity: 'Actividad',
+        activityText: 'Instalación de conductos de ventilación, extracción de humos de cocina y climatización.',
+        pending: 'Pendiente de facilitar' },
+  en: { holder: 'Owner', taxId: 'Tax number', registry: 'Companies Register',
+        address: 'Registered address', email: 'Email', phone: 'Phone',
+        rite: 'Registered installer (RITE)', activity: 'Activity',
+        activityText: 'Installation of ventilation ductwork, commercial kitchen extraction and air conditioning.',
+        pending: 'To be supplied' },
+}[lang];
+
+const complete = hasLegalIdentity() && hasAddress();
+---
+<TextPage
+  pageKey="legal"
+  lang={lang}
+  title={copy.title}
+  description={copy.description}
+  eyebrow={copy.eyebrow}
+  h1={copy.h1}
+  lede={copy.lede}
+  navLabel={copy.navLabel}
+  waMessage={copy.waMessage}
+>
+  {copy.sections.map((s, i) => (
+    <>
+      <h2>{s.h2}</h2>
+      {s.p.map((p) => <p>{p}</p>)}
+      {s.bullets && <ul>{s.bullets.map((b) => <li>{b}</li>)}</ul>}
+
+      {i === 0 && (
+        <>
+          {!complete && <p class="pending">{copy.pendingNotice}</p>}
+          <dl class="ident">
+            <dt>{L.holder}</dt>
+            <dd>{BUSINESS.legal.holder || L.pending}</dd>
+            <dt>{L.taxId}</dt>
+            <dd>{BUSINESS.legal.taxId || L.pending}</dd>
+            {BUSINESS.legal.registry && (
+              <>
+                <dt>{L.registry}</dt>
+                <dd>{BUSINESS.legal.registry}</dd>
+              </>
+            )}
+            <dt>{L.address}</dt>
+            <dd>{hasAddress() ? addressOneLine() : L.pending}</dd>
+            <dt>{L.email}</dt>
+            <dd><a href={'mailto:' + BUSINESS.email}>{BUSINESS.email}</a></dd>
+            <dt>{L.phone}</dt>
+            <dd class="tnum">{BUSINESS.phone.display} · {BUSINESS.phone2.display}</dd>
+            {BUSINESS.legal.riteNumber && (
+              <>
+                <dt>{L.rite}</dt>
+                <dd>{BUSINESS.legal.riteNumber}</dd>
+              </>
+            )}
+            <dt>{L.activity}</dt>
+            <dd>{L.activityText}</dd>
+          </dl>
+        </>
+      )}
+    </>
+  ))}
+</TextPage>
+
+<style>
+  .pending {
+    border-left: 3px solid var(--red-500);
+    background: var(--red-050);
+    padding: var(--s4);
+    font-size: var(--fs-small);
+  }
+  .ident {
+    display: grid;
+    gap: 0;
+    border-top: 1px solid var(--line);
+    margin-top: var(--s5);
+  }
+  @media (min-width: 600px) { .ident { grid-template-columns: 220px 1fr; } }
+  .ident dt {
+    font-family: var(--font-mono);
+    font-size: var(--fs-eyebrow);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--steel-500);
+    padding: var(--s3) 0 0;
+  }
+  .ident dd {
+    margin: 0;
+    padding: var(--s3) 0;
+    border-bottom: 1px solid var(--line);
+  }
+  @media (min-width: 600px) {
+    .ident dt { padding: var(--s3) var(--s4) var(--s3) 0; border-bottom: 1px solid var(--line); }
+  }
+</style>

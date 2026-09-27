@@ -1,0 +1,28 @@
+---
+import { SERVICE_AREAS } from '../config/site';
+import { UI } from '../i18n/ui';
+import type { Lang } from '../i18n/routes';
+import MapaMadrid from './diagrams/MapaMadrid.astro';
+
+interface Props { lang: Lang; heading?: string }
+const { lang, heading } = Astro.props;
+const t = UI[lang];
+---
+<div class="area">
+  <div>
+    <h2>{heading ?? t.areaHeading}</h2>
+    <p class="lede" style="margin-top:var(--s4)">{t.areaLead}</p>
+    <ul class="chips" style="margin-top:var(--s5)">
+      {SERVICE_AREAS.map((a) => <li>{a}</li>)}
+    </ul>
+  </div>
+  <div class="area__map"><MapaMadrid /></div>
+</div>
+
+<style>
+  .area { display: grid; gap: var(--s7); }
+  @media (min-width: 900px) {
+    .area { grid-template-columns: 1fr 320px; align-items: start; }
+  }
+  .area__map { justify-self: center; width: 100%; max-width: 320px; }
+</style>

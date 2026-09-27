@@ -1,0 +1,284 @@
+{
+  "_readme": [
+    "Hand-authored once. This is where ALL human judgement about the photographs lives.",
+    "crop: [left, top, right, bottom] in source pixels, or null for the whole frame.",
+    "ratio: target aspect after cropping toward focus. One of 4:3, 3:4, 16:9. NEVER upscales.",
+    "focus: [x, y] in 0..1, the point the aspect crop is taken around.",
+    "wb: 0..1 strength of the clamped-percentile white balance. 0 leaves the file alone.",
+    "wb_midtone: compute the white reference over midtones only, for casts a global measure cannot see.",
+    "grade: neutral or duotone.",
+    "Files not listed here are deliberately NOT published. See tools/EXCLUDED.md for the reasons."
+  ],
+  "images": [
+    {
+      "id": "cubierta-panel-preaislado",
+      "src": "toooo.jpeg",
+      "crop": null,
+      "ratio": "3:4",
+      "focus": [0.5, 0.42],
+      "wb": 0.6,
+      "wb_midtone": false,
+      "grade": "neutral",
+      "alt": {
+        "es": "Conductos de ventilación de panel preaislado instalados en la cubierta de un edificio, con juntas flexibles y soportes metálicos",
+        "en": "Pre-insulated panel ventilation ducts installed on a building roof, with flexible connectors and steel supports"
+      },
+      "caption": {
+        "es": "Conducto de panel preaislado en cubierta · juntas flexibles y soportes regulables",
+        "en": "Pre-insulated panel duct on a roof · flexible connectors and adjustable supports"
+      }
+    },
+    {
+      "id": "garaje-conductos-rejillas",
+      "src": "tooooo.jpeg",
+      "crop": [0, 13, 918, 492],
+      "ratio": "16:9",
+      "focus": [0.42, 0.5],
+      "wb": 0.6,
+      "wb_midtone": false,
+      "grade": "neutral",
+      "alt": {
+        "es": "Conductos de ventilación de chapa galvanizada con rejillas de impulsión bajo el forjado de un aparcamiento en Madrid",
+        "en": "Galvanised steel ventilation ducts with supply grilles under a car park slab in Madrid"
+      },
+      "caption": {
+        "es": "Ventilación de aparcamiento · conducto rectangular galvanizado con rejillas de impulsión",
+        "en": "Car park ventilation · rectangular galvanised duct with supply grilles"
+      }
+    },
+    {
+      "id": "cubierta-red-conductos-uta",
+      "src": "to.jpeg",
+      "crop": null,
+      "ratio": "4:3",
+      "focus": [0.5, 0.55],
+      "wb": 0.6,
+      "wb_midtone": false,
+      "grade": "neutral",
+      "alt": {
+        "es": "Red de conductos de ventilación de chapa galvanizada en cubierta, sobre soportes, conectada a unidades de tratamiento de aire",
+        "en": "Galvanised ventilation ductwork on a rooftop, on stands, connected to air handling units"
+      },
+      "caption": {
+        "es": "Sala de máquinas en cubierta · conducto rectangular sobre soportes y unidades de tratamiento de aire",
+        "en": "Rooftop plant · rectangular duct on stands and air handling units"
+      }
+    },
+    {
+      "id": "sotano-conductos-suspendidos",
+      "src": "toooooooooo.jpeg",
+      "crop": null,
+      "ratio": "16:9",
+      "focus": [0.5, 0.4],
+      "wb": 0.6,
+      "wb_midtone": false,
+      "grade": "neutral",
+      "alt": {
+        "es": "Conductos de ventilación rectangulares suspendidos con varilla roscada bajo el forjado de un sótano en obra",
+        "en": "Rectangular ventilation ducts suspended on threaded rod under a basement slab during construction"
+      },
+      "caption": {
+        "es": "Sótano diáfano · conducto rectangular suspendido con varilla roscada y perfilería",
+        "en": "Open-plan basement · rectangular duct suspended on threaded rod and channel"
+      }
+    },
+    {
+      "id": "red-conductos-derivaciones",
+      "src": "too.jpeg",
+      "crop": null,
+      "ratio": "4:3",
+      "focus": [0.5, 0.45],
+      "wb": 0.45,
+      "wb_midtone": false,
+      "grade": "neutral",
+      "alt": {
+        "es": "Red densa de conductos metálicos de ventilación con transformaciones y derivaciones bajo el techo de un local",
+        "en": "Dense network of metal ventilation ducts with transitions and branch take-offs under a ceiling"
+      },
+      "caption": {
+        "es": "Colector y derivaciones · transformaciones y ramales en chapa galvanizada",
+        "en": "Header and branches · transitions and take-offs in galvanised sheet"
+      }
+    },
+    {
+      "id": "obra-derivacion-y",
+      "src": "WhatsApp Image 2026-08-30 at 1.48.33 PMsas.jpeg",
+      "crop": [0, 0, 900, 1380],
+      "ratio": "3:4",
+      "focus": [0.5, 0.4],
+      "wb": 0.45,
+      "wb_midtone": false,
+      "grade": "neutral",
+      "alt": {
+        "es": "Derivación en Y de conductos de ventilación de chapa galvanizada con junta de brida bajo un forjado de hormigón",
+        "en": "Y-branch in galvanised ventilation ductwork with a flanged joint under a concrete slab"
+      },
+      "caption": {
+        "es": "Derivación en Y ejecutada en obra · unión por brida con junta",
+        "en": "Y-branch made on site · gasketed flange joint"
+      }
+    },
+    {
+      "id": "cubierta-extractores-sombreretes",
+      "src": "WhatsApp Image 2026-08-30 at 1.48.26 PMhhh.jpeg",
+      "crop": [0, 510, 738, 1064],
+      "ratio": "4:3",
+      "focus": [0.58, 0.55],
+      "wb": 0.5,
+      "wb_midtone": false,
+      "grade": "neutral",
+      "alt": {
+        "es": "Batería de cajas de ventilación con sombreretes de descarga instaladas en la cubierta de una nave industrial",
+        "en": "Row of ventilation fan boxes with discharge cowls installed on an industrial roof"
+      },
+      "caption": {
+        "es": "Descarga en cubierta · cajas de ventilación con sombrerete cónico sobre bancada",
+        "en": "Roof discharge · fan boxes with conical cowls on a support frame"
+      }
+    },
+    {
+      "id": "montante-inox-patio",
+      "src": "WhatsApp Image 2026-08-30 at gggPM.jpeg",
+      "crop": null,
+      "ratio": "3:4",
+      "focus": [0.45, 0.5],
+      "wb": 0.5,
+      "wb_midtone": false,
+      "grade": "neutral",
+      "alt": {
+        "es": "Montante vertical de conducto circular de acero inoxidable para extracción de humos por un patio de luces",
+        "en": "Vertical stainless steel round duct riser for kitchen extraction up a lightwell"
+      },
+      "caption": {
+        "es": "Montante de extracción en inox · tramos modulares con abrazadera y soporte a muro",
+        "en": "Stainless extraction riser · modular sections with band clamps and wall brackets"
+      }
+    },
+    {
+      "id": "taller-helicoidal-espiro",
+      "src": "WhatsApp Image 2026-08-30 at 1.48.33 PMsasa.jpeg",
+      "crop": null,
+      "ratio": "3:4",
+      "focus": [0.45, 0.5],
+      "wb": 0.45,
+      "wb_midtone": false,
+      "grade": "neutral",
+      "alt": {
+        "es": "Hilera de conductos helicoidales de chapa galvanizada de gran diámetro en el taller antes del montaje",
+        "en": "Row of large-diameter galvanised spiral ducts in the workshop before installation"
+      },
+      "caption": {
+        "es": "Conducto helicoidal de gran diámetro · acopio en taller antes de expedición",
+        "en": "Large-diameter spiral duct · staged in the workshop before dispatch"
+      }
+    },
+    {
+      "id": "taller-piezas-acopio",
+      "src": "WhatsApp Image 2026-08-30 at 1.39.09 PM.jpeg",
+      "crop": [0, 150, 900, 1500],
+      "ratio": "3:4",
+      "focus": [0.5, 0.5],
+      "wb": 0.45,
+      "wb_midtone": false,
+      "grade": "neutral",
+      "alt": {
+        "es": "Tramos de conducto rectangular, codos y transformaciones de chapa galvanizada fabricados a medida en el taller",
+        "en": "Rectangular duct sections, elbows and transitions in galvanised sheet, custom made in the workshop"
+      },
+      "caption": {
+        "es": "Fabricación a medida · tramos rectos, codos y transformaciones listos para obra",
+        "en": "Made to measure · straight sections, elbows and transitions ready for site"
+      }
+    },
+    {
+      "id": "taller-campana-plegadora",
+      "src": "WhatsApp Image 2026-08-30 at 1.39.55 PM.jpeg",
+      "crop": [0, 200, 900, 1550],
+      "ratio": "3:4",
+      "focus": [0.5, 0.45],
+      "wb": 0.7,
+      "wb_midtone": true,
+      "grade": "neutral",
+      "alt": {
+        "es": "Campana de captación piramidal de chapa fabricada a medida en el taller, con la plegadora al fondo",
+        "en": "Custom-made pyramidal capture hood in sheet metal in the workshop, with the press brake behind"
+      },
+      "caption": {
+        "es": "Campana de captación plegada en nuestro taller · collarín circular y marco perimetral",
+        "en": "Capture hood folded in our own workshop · circular collar and perimeter frame"
+      }
+    },
+    {
+      "id": "taller-nesting-cadcam",
+      "src": "WhatsApp Image 2026-08-30 at 1.48.26 PM.jpeg",
+      "crop": [205, 205, 1520, 1180],
+      "ratio": "4:3",
+      "focus": [0.5, 0.5],
+      "wb": 0.45,
+      "wb_midtone": false,
+      "grade": "neutral",
+      "alt": {
+        "es": "Pantalla del software de despiece y anidado del taller con los desarrollos numerados de las piezas de conducto sobre la chapa",
+        "en": "Workshop CAD/CAM nesting screen showing numbered flat patterns for duct parts laid out on the sheet"
+      },
+      "caption": {
+        "es": "Despiece y anidado CAD/CAM · desarrollos numerados sobre chapa de 0,8 mm, formato 2587 × 1495 mm",
+        "en": "CAD/CAM nesting · numbered flat patterns on 0.8 mm sheet, 2587 × 1495 mm format"
+      }
+    },
+    {
+      "id": "obra-equipos-sodeca",
+      "src": "WhatsApp Image 2026-08-30 at 1.48.33 PM.jpeg",
+      "crop": [0, 615, 1200, 1515],
+      "ratio": "4:3",
+      "focus": [0.55, 0.5],
+      "wb": 0.45,
+      "wb_midtone": false,
+      "grade": "neutral",
+      "alt": {
+        "es": "Cajas de ventilación paletizadas recibidas en una obra de nueva construcción, con operario y equipo de protección",
+        "en": "Palletised ventilation fan units received on a new-build site, with an operative in protective equipment"
+      },
+      "caption": {
+        "es": "Recepción de equipos en obra nueva · cajas de ventilación paletizadas",
+        "en": "Equipment received on a new-build site · palletised fan units"
+      }
+    },
+    {
+      "id": "cocina-campana-inox",
+      "src": "toooooooooooooo.jpeg",
+      "crop": [0, 0, 918, 644],
+      "ratio": "4:3",
+      "focus": [0.42, 0.42],
+      "wb": 0.45,
+      "wb_midtone": false,
+      "grade": "neutral",
+      "alt": {
+        "es": "Campana extractora mural de acero inoxidable con filtros de lamas sobre una línea de cocción de cocina industrial",
+        "en": "Stainless steel wall-mounted extraction hood with baffle filters over a commercial kitchen cooking line"
+      },
+      "caption": {
+        "es": "Campana mural con filtros de lamas sobre línea de cocción · imagen de referencia",
+        "en": "Wall hood with baffle filters over a cooking line · reference image"
+      }
+    },
+    {
+      "id": "producto-panel-preaislado",
+      "src": "toooooooooooooooooooo.jpeg",
+      "crop": null,
+      "ratio": "3:4",
+      "focus": [0.5, 0.5],
+      "wb": 0.25,
+      "wb_midtone": false,
+      "grade": "neutral",
+      "alt": {
+        "es": "Conducto autoportante de panel preaislado de aluminio, con derivación en T y curva",
+        "en": "Self-supporting pre-insulated aluminium panel duct, with a T-branch and a bend"
+      },
+      "caption": {
+        "es": "Panel preaislado de aluminio · imagen de producto del fabricante",
+        "en": "Pre-insulated aluminium panel · manufacturer product image"
+      }
+    }
+  ]
+}

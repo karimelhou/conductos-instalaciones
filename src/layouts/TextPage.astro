@@ -1,0 +1,57 @@
+---
+import { type Lang, type PageKey, urlFor } from '../i18n/routes';
+import { UI } from '../i18n/ui';
+import { breadcrumbNode, businessNode, graph, websiteNode, type Crumb } from '../lib/schema';
+import Base from './Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+interface Props {
+  pageKey: PageKey;
+  lang: Lang;
+  title: string;
+  description: string;
+  eyebrow: string;
+  h1: string;
+  lede: string;
+  navLabel: string;
+  waMessage?: string;
+}
+
+const { pageKey, lang, title, description, eyebrow, h1, lede, navLabel, waMessage } =
+  Astro.props;
+const t = UI[lang];
+
+const crumbs: Crumb[] = [
+  { name: t.breadcrumbHome, url: urlFor('home', lang) },
+  { name: navLabel, url: urlFor(pageKey, lang) },
+];
+---
+<Base
+  pageKey={pageKey}
+  lang={lang}
+  title={title}
+  description={description}
+  jsonLd={graph([businessNode(lang), websiteNode(lang), breadcrumbNode(crumbs)])}
+  waMessage={waMessage}
+>
+  <section class="band band--ink hd">
+    <div class="container">
+      <p class="eyebrow">{eyebrow}</p>
+      <h1>{h1}</h1>
+      <p class="lede">{lede}</p>
+    </div>
+    <div class="trim"></div>
+  </section>
+  <Breadcrumbs crumbs={crumbs} lang={lang} />
+
+  <section class="band band--paper">
+    <div class="container">
+      <div class="prose"><slot /></div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hd { padding-block: var(--s8) var(--s8); }
+  .hd .lede { margin-top: var(--s4); max-width: 60ch; }
+</style>

@@ -1,0 +1,118 @@
+---
+import { BUSINESS, addressOneLine, hasAddress } from '../config/site';
+import { type Lang, urlFor } from '../i18n/routes';
+import { UI } from '../i18n/ui';
+import type { ContactCopy } from '../copy/types';
+import { breadcrumbNode, businessNode, graph, websiteNode, type Crumb } from '../lib/schema';
+import { telHref, telHref2, mailHref, waHref } from '../lib/contact';
+
+import Base from './Base.astro';
+import Hero from '../components/Hero.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Band from '../components/Band.astro';
+import AreaServed from '../components/AreaServed.astro';
+import Plate from '../components/Plate.astro';
+
+interface Props { lang: Lang; copy: ContactCopy }
+const { lang, copy } = Astro.props;
+const t = UI[lang];
+
+const crumbs: Crumb[] = [
+  { name: t.breadcrumbHome, url: urlFor('home', lang) },
+  { name: copy.navLabel, url: urlFor('contacto', lang) },
+];
+
+const weekdayHours = BUSINESS.hours.weekdays.open + ' – ' + BUSINESS.hours.weekdays.close;
+const saturdayHours = BUSINESS.hours.saturday.open + ' – ' + BUSINESS.hours.saturday.close;
+const waLabel = t.whatsappAria + ' ' + BUSINESS.phone.display;
+---
+<Base
+  pageKey="contacto"
+  lang={lang}
+  title={copy.title}
+  description={copy.description}
+  jsonLd={graph([businessNode(lang), websiteNode(lang), breadcrumbNode(crumbs)])}
+  waMessage={copy.waMessage}
+>
+  <Hero lang={lang} eyebrow={copy.eyebrow} title={copy.h1} lede={copy.lede} />
+  <Breadcrumbs crumbs={crumbs} lang={lang} />
+
+  <Band tone="paper">
+    <div class="ct">
+      <div class="prose">
+        {copy.intro.map((p) => <p>{p}</p>)}
+
+        <h2>{copy.whyHeading}</h2>
+        <ul>{copy.why.map((w) => <li>{w}</li>)}</ul>
+      </div>
+
+      <aside class="ct__card">
+        <a class="btn btn--primary tnum" href={telHref()}>
+          {t.callCta} {BUSINESS.phone.display}
+        </a>
+        <a class="btn btn--wa" href={waHref(copy.waMessage)} target="_blank"
+           rel="noopener" aria-label={waLabel}>
+          {t.whatsappCta}
+        </a>
+
+        <dl class="ct__nap">
+          <dt>{t.phoneLabel}</dt>
+          <dd><a class="tnum" href={telHref()}>{BUSINESS.phone.display}</a></dd>
+          <dt>{t.phone2Label}</dt>
+          <dd><a class="tnum" href={telHref2()}>{BUSINESS.phone2.display}</a></dd>
+          <dt>{t.emailLabel}</dt>
+          <dd><a href={mailHref()}>{BUSINESS.email}</a></dd>
+          {hasAddress() && (
+            <>
+              <dt>{t.addressLabel}</dt>
+              <dd><address>{addressOneLine()}</address></dd>
+            </>
+          )}
+          <dt>{copy.hoursHeading}</dt>
+          <dd>
+            <span class="tnum">{t.hoursWeekdays}: {weekdayHours}</span><br />
+            <span class="tnum">{t.hoursSaturday}: {saturdayHours}</span><br />
+            <span>{t.hoursSunday}</span>
+          </dd>
+        </dl>
+      </aside>
+    </div>
+  </Band>
+
+  <Band tone="alt">
+    <AreaServed lang={lang} heading={copy.areaHeading} />
+  </Band>
+
+  <Band tone="white">
+    <div class="ct__photo">
+      <Plate id="taller-piezas-acopio" lang={lang} fig={1} />
+    </div>
+  </Band>
+</Base>
+
+<style>
+  .ct { display: grid; gap: var(--s7); }
+  @media (min-width: 900px) {
+    .ct { grid-template-columns: 1fr 340px; gap: var(--s9); align-items: start; }
+  }
+  .ct__card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--r);
+    padding: var(--s5);
+    display: grid;
+    gap: var(--s3);
+  }
+  .ct__nap { margin-top: var(--s3); display: grid; gap: var(--s1); font-size: var(--fs-small); }
+  .ct__nap dt {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--steel-500);
+    margin-top: var(--s3);
+  }
+  .ct__nap dd { margin: 0; }
+  .ct__nap address { font-style: normal; }
+  .ct__photo { max-width: var(--photo-max); margin-inline: auto; }
+</style>

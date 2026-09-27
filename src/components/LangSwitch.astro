@@ -1,0 +1,31 @@
+---
+/** Always lands on the translated twin, because it resolves through the slug
+ *  table by page key rather than by string-munging the current path. */
+import { type Lang, type PageKey, pathFor } from '../i18n/routes';
+import { UI } from '../i18n/ui';
+
+interface Props { pageKey: PageKey; lang: Lang }
+const { pageKey, lang } = Astro.props;
+const other: Lang = lang === 'es' ? 'en' : 'es';
+---
+<a class="lang" href={pathFor(pageKey, other)} hreflang={other} lang={other}
+   aria-label={UI[lang].langSwitchLabel}>
+  <span aria-hidden="true">{other.toUpperCase()}</span>
+  <span class="sr-only">{UI[lang].otherLangName}</span>
+</a>
+
+<style>
+  .lang {
+    font-family: var(--font-mono);
+    font-size: var(--fs-eyebrow);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--steel-300);
+    text-decoration: none;
+    border: 1px solid var(--hair-dark);
+    border-radius: var(--r);
+    padding: 6px 10px;
+    line-height: 1;
+  }
+  .lang:hover { color: var(--white); border-color: var(--steel-500); }
+</style>

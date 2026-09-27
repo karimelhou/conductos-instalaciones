@@ -1,0 +1,26 @@
+---
+/** Cross-links with keyword-bearing anchors authored per page pair, never a
+ *  generic "más información". The current page excludes itself. */
+import { type Lang, type PageKey, pathFor } from '../i18n/routes';
+import { UI } from '../i18n/ui';
+import { COPY } from '../copy/registry';
+
+interface Props { lang: Lang; exclude?: PageKey }
+const { lang, exclude } = Astro.props;
+const t = UI[lang];
+const keys: PageKey[] = (['ventilacion', 'humos', 'clima'] as PageKey[]).filter(
+  (k) => k !== exclude
+);
+---
+<div class="grid grid--3">
+  {keys.map((k) => {
+    const c = COPY[k][lang];
+    return (
+      <a class="card" href={pathFor(k, lang)}>
+        <h3>{c.cardTitle}</h3>
+        <p>{c.cardBody}</p>
+        <span class="more">{t.readMore} →</span>
+      </a>
+    );
+  })}
+</div>

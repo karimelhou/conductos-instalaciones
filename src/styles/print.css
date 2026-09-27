@@ -1,0 +1,55 @@
+@media print {
+  .hdr__nav,
+  .lang,
+  .wa,
+  .callbar,
+  .skip,
+  .trim,
+  .crumbs {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 11pt;
+    padding-bottom: 0;
+  }
+
+  .band {
+    padding-block: 12pt;
+    background: #fff !important;
+    color: #000 !important;
+    border-top: 1px solid #999;
+  }
+  .band--ink h1,
+  .band--ink h2,
+  .band--ink h3,
+  .band--ink .lede,
+  .band--ink a {
+    color: #000 !important;
+  }
+
+  .hdr {
+    background: #fff !important;
+    border-bottom: 2px solid #000;
+  }
+  .wordmark__a,
+  .wordmark__b { color: #000 !important; }
+
+  /* Print the destination of a link, since a printed page cannot be clicked. */
+  a[href^='tel:']::after { content: ' (' attr(href) ')'; font-size: 9pt; }
+  a[href^='mailto:']::after { content: ' (' attr(href) ')'; font-size: 9pt; }
+
+  .plate { break-inside: avoid; border-color: #999; }
+  .plate img { filter: none; }
+  .faq details { break-inside: avoid; }
+  .faq details > div { display: block !important; }
+  .spec { break-inside: auto; }
+  .spec tr { break-inside: avoid; }
+
+  h1, h2, h3 { break-after: avoid; }
+
+  .ftr { background: #fff !important; color: #000 !important; padding-top: 12pt; }
+  .ftr a, .ftr h2, .ftr__nap a, .ftr__nap address { color: #000 !important; }
+}

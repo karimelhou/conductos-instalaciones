@@ -1,0 +1,53 @@
+---
+/** Mobile only, CSS only. body has a matching padding-bottom so this can never
+ *  cover the last line of the footer. */
+import { BUSINESS } from '../config/site';
+import { telHref, waHref } from '../lib/contact';
+import { UI } from '../i18n/ui';
+import type { Lang } from '../i18n/routes';
+
+interface Props { lang: Lang; message?: string }
+const { lang, message } = Astro.props;
+const t = UI[lang];
+const callLabel = t.callAria + ' ' + BUSINESS.phone.display;
+---
+<div class="callbar">
+  <a class="callbar__a" href={telHref()} aria-label={callLabel}>
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.3.2 2.5.57 3.6a1 1 0 0 1-.25 1z"/>
+    </svg>
+    <span class="tnum">{BUSINESS.phone.display}</span>
+  </a>
+  <a class="callbar__b" href={waHref(message)} target="_blank" rel="noopener">
+    <span>{t.whatsappCta}</span>
+  </a>
+</div>
+
+<style>
+  .callbar {
+    position: fixed;
+    inset: auto 0 0 0;
+    z-index: 45;
+    height: var(--callbar-h);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    background: var(--ink-900);
+    border-top: 1px solid var(--hair-dark);
+  }
+  .callbar a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--s2);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+  .callbar__a { color: var(--white); }
+  .callbar__a svg { width: 20px; height: 20px; color: var(--red-500); }
+  .callbar__b { background: var(--wa); color: #06331a; padding-inline: var(--s5); }
+  @media (min-width: 768px) { .callbar { display: none; } }
+</style>

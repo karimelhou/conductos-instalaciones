@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://conductosinstalaciones.es/sitemap-index.xml
