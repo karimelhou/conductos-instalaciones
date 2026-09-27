@@ -125,17 +125,28 @@ registros basta.
 En hPanel: *Noms de domaine* → **conductosinstalaciones.es** → *DNS / Serveurs
 de noms* → **Gérer les enregistrements DNS**.
 
-1. **Borra primero los registros de aparcamiento.** Hostinger crea por defecto
-   un registro `A` en `@` y un `CNAME` en `www` que apuntan a su página de
-   aparcamiento. Si los dejas, chocan con los nuevos y el dominio no valida.
-   Borra los dos.
+1. **Quita primero los registros de aparcamiento.** Hostinger deja puestos
+   estos dos, que apuntan a su propia página de aparcamiento. Si se quedan,
+   chocan con los nuevos y el dominio no valida nunca:
 
-2. Crea estos dos, con los valores que te enseñó Vercel:
+   | Tipo | Nombre | Contenido | |
+   | --- | --- | --- | --- |
+   | `A` | `@` | `2.57.91.91` | ← IP de aparcamiento de Hostinger, **fuera** |
+   | `CNAME` | `www` | `conductosinstalaciones.es` | ← **fuera** |
+
+   Puedes borrarlos con el icono de papelera, o editarlos directamente y
+   cambiarles el contenido por el del paso siguiente. Da igual.
+
+2. Deja estos dos, con los valores que te enseñe Vercel en *View DNS
+   configuration*:
 
    | Tipo | Nombre | Valor | TTL |
    | --- | --- | --- | --- |
-   | `A` | `@` | el que indique Vercel (normalmente `76.76.21.21`) | 3600 |
-   | `CNAME` | `www` | el valor propio de tu proyecto, `…vercel-dns-0XX.com` | 3600 |
+   | `A` | `@` | el que indique Vercel (normalmente `76.76.21.21`) | 14400 |
+   | `CNAME` | `www` | el valor **propio de tu proyecto**, `…vercel-dns-0XX.com` | 14400 |
+
+   No puede quedar más de un registro `A` en `@`, ni un `A` y un `CNAME` con el
+   mismo nombre: eso es lo que produce el *Invalid Configuration*.
 
 3. Guarda. La propagación suele tardar entre 10 minutos y 2 horas. Vercel emite
    el certificado HTTPS solo en cuanto detecta los registros: no hay que tocar
