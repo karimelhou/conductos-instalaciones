@@ -142,13 +142,43 @@ de noms* → **Gérer les enregistrements DNS**.
    nada de SSL. El aviso de "Installation du SSL en cours" que ves ahora en
    Hostinger es de su página de aparcamiento y deja de tener sentido.
 
-### 3.3 — Cuál de los dos manda
+### 3.3 — Cuál de los dos manda ⚠️ HAY QUE CORREGIRLO
 
-En *Settings* → *Domains*, deja **`conductosinstalaciones.es` como principal** y
-`www.conductosinstalaciones.es` **redirigiendo** hacia él (308). Tiene que ser en
-ese sentido, porque todas las etiquetas canónicas de la web están escritas sin
-`www`. Con los dos activos a la vez tendrías dos direcciones para cada página y
-Google repartiría la fuerza entre ambas.
+Vercel, al añadir el dominio, pone **www como principal** y hace que el dominio
+sin www redirija hacia él. **Para esta web es justo al revés** y hay que
+cambiarlo a mano.
+
+El motivo: las 12 direcciones del sitemap, todas las etiquetas `canonical` y
+todos los `hreflang` están escritos **sin `www`** (salen de `SITE_URL`). Si se
+queda como lo deja Vercel, le estás diciendo a Google "la página buena es la del
+dominio sin www" mientras que esa misma dirección echa al visitante a www. Es
+una contradicción que cuesta posiciones.
+
+Cómo se ve el problema en *Settings* → *Domains*:
+
+```
+conductosinstalaciones.es        308 →  www.conductosinstalaciones.es    ← MAL
+```
+
+Cómo tiene que quedar:
+
+```
+conductosinstalaciones.es                                          ← principal
+www.conductosinstalaciones.es    308 →  conductosinstalaciones.es  ← redirige
+```
+
+Para arreglarlo, en *Settings* → *Domains*:
+
+1. En la fila de **`conductosinstalaciones.es`**, abre **Edit**. Donde ponga
+   *Redirect to `www.conductosinstalaciones.es`*, cámbialo a **No Redirect**
+   (que sirva el despliegue de producción). Guarda.
+2. En la fila de **`www.conductosinstalaciones.es`**, abre **Edit** y ponlo a
+   *Redirect to* → **`conductosinstalaciones.es`**, código **308**. Guarda.
+
+> Las dos filas dirán *Invalid Configuration* hasta que los registros DNS del
+> paso 3.2 estén puestos y propagados. Es normal: ahora mismo el dominio no
+> apunta a ninguna parte. El sentido de la redirección se puede dejar bien
+> configurado desde ya, sin esperar al DNS.
 
 ### 3.4 — Comprobar que quedó bien
 
